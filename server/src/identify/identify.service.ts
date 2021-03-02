@@ -28,8 +28,21 @@ export class IdentifyService {
     }
 
     // 로그인
-    async userSignIn() {
-        return "로그인 진행";
+    async userSignInEmail({ email }) {
+        const user = await this.userRepository
+            .createQueryBuilder('user')
+            .where('user.email = :email', { email: email })
+            .getOne();
+        console.log(user);
+        
+        if( !user ) return null;
+        return {
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+        }
     }
-
+    async userSignInPassword() {
+        return "비밀번호 확인";
+    }
 }

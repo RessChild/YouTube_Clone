@@ -72,7 +72,7 @@ const SignUp = ({ history }) => {
         display="flex" flexDirection="column" alignItems="center" justifyContent="center">
         <Box width="40rem" padding="2rem" paddingTop="3rem" paddingBottom="3rem"
             border={1} borderColor="#999999" borderRadius="0.5rem"
-            display="flex" alignItems="center">
+            display="flex" alignItems="center" position="relative">
             <Box flex={7} display="flex" flexDirection="column">
                 <img src={Logo} style={{ maxWidth: "7rem" }} />
                 <Box fontSize="1.4rem" fontWeight="600" >YouTube Clone 계정 만들기</Box>

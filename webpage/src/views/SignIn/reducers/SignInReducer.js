@@ -1,6 +1,7 @@
 export const signInDefault = {
     isLoading: false,
     isError: 0,
+    mode: 'email',
     signIn: {
         email: '',
         password: '',
