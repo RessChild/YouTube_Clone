@@ -3,6 +3,8 @@ export const signInDefault = {
     isError: 0,
     mode: 'email',
     signIn: {
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
     }
