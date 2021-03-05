@@ -10,12 +10,16 @@ export class IdentifyService {
         private readonly userRepository: Repository<User>,
     ) {}
 
-    // 회원가입
-    async userSignUp({ firstName, lastName, email, password }) {
-        const user = await this.userRepository
+    findUser(email) {
+        return this.userRepository
             .createQueryBuilder('user')
             .where("user.email = :email", { email: email })
             .getOne();
+    }
+
+    // 회원가입
+    async userSignUp({ firstName, lastName, email, password }) {
+        const user = await this.findUser(email);
      
         console.log(user);
         let new_user = null;
@@ -29,10 +33,7 @@ export class IdentifyService {
 
     // 로그인
     async userSignInEmail({ email }) {
-        const user = await this.userRepository
-            .createQueryBuilder('user')
-            .where('user.email = :email', { email: email })
-            .getOne();
+        const user = await this.findUser(email);
         console.log(user);
         
         if( !user ) return null;
@@ -42,7 +43,9 @@ export class IdentifyService {
             lastName: user.lastName,
         }
     }
-    async userSignInPassword() {
-        return "비밀번호 확인";
+    async userSignInPassword({ email, password }) {
+        const user = await this.findUser(email);
+        console.log(user);
+        return user && user.password === password ? 200 : 403 ;
     }
 }

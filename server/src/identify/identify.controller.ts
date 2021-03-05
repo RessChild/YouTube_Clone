@@ -22,8 +22,9 @@ export class IdentifyController {
     }
     
     @Post('/sign-in/password')
-    async userSignInPassword() {
+    async userSignInPassword(@Body() body, @Res() res) {
         console.log('sign-in password');
-        return await this.identifyService.userSignInPassword();
+        const result = await this.identifyService.userSignInPassword(body);
+        return res.status(result).end();
     }
 }

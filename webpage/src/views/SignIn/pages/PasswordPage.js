@@ -1,15 +1,15 @@
 import { Box, Button, Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Sample from "../../../sources/sample_img.png";
 
 const PasswordPage = ({ signIn, dispatch, CHANGE_DATA, CHANGE_DATA_STRUCT }) => {
 
+    const history = useHistory();
     const source = axios.CancelToken.source();
-    const [ showPassword, setShowPassword ] = useState(false)
-
+    const [ showPassword, setShowPassword ] = useState(false);
     // 비밀번호 표시 변경
     const handleChange = () => setShowPassword(!showPassword);
 
@@ -19,7 +19,20 @@ const PasswordPage = ({ signIn, dispatch, CHANGE_DATA, CHANGE_DATA_STRUCT }) => 
     }
 
     const onClickSubmit = () => {
-        alert("비밀번호 확인");
+        if( !signIn.password ) return;
+        dispatch({ type: CHANGE_DATA, data: { isLoading: true }});
+        axios.post('/api/identify/sign-in/password', 
+            { email: signIn.email, password: signIn.password }, 
+            { cancelToken: source.token })
+            .then(({ data }) => {
+                const { password, ...userInfo } = signIn;
+                localStorage.setItem("userInfo", JSON.stringify(userInfo));
+                history.push('/');
+            })
+            .catch( e => {
+                if( axios.isCancel(e) ) return;
+                dispatch({ type: CHANGE_DATA, data: { isLoading: false }});
+            });
     }
 
     useEffect(() => {
@@ -51,7 +64,7 @@ const PasswordPage = ({ signIn, dispatch, CHANGE_DATA, CHANGE_DATA_STRUCT }) => 
         </Box>
         <Box display="flex" alignItems="center" justifyContent="space-between" marginTop="3rem">
             <Link to="/" style={{ textDecoration: "none", color: "blue" }}>비밀번호 찾기</Link>
-            <Button onClick={onClickSubmit} variant="contained" color="primary">다음</Button>
+            <Button disabled={!signIn.password} onClick={onClickSubmit} variant="contained" color="primary">다음</Button>
         </Box>
     </>
 };

@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@material-ui/core";
+import { Box, Button, LinearProgress, TextField } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useReducer, useState } from "react";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
@@ -35,15 +35,21 @@ const SignIn = ({ history }) => {
     }
 
     useEffect(() => {
-        console.log(mode);  
-        history.push(`/identify/sign-in/${mode}`)
+        history.replace(`/identify/sign-in/${mode}`)
     }, [mode])
 
     return <Box width="100vw" height="100vh"
         display="flex" flexDirection="column" alignItems="center" justifyContent="center">
         {/* <Box position="absolute" top="0" bgcolor="blue">ㅇㅅㅇ</Box> */}
         <Box width="24rem" height="28rem" padding="2rem" paddingTop="3rem" paddingBottom="3rem"
-            border={1} borderColor="#999999" borderRadius="0.5rem" textAlign="center">
+            border={1} borderColor="#999999" borderRadius="0.5rem" textAlign="center"
+            position="relative">
+            { isLoading && 
+                <Box position="absolute" display="flex" flexDirection="column" top={0} left={0} width="100%" height="100%">
+                    <LinearProgress />
+                    <Box flex={1} bgcolor="#9f9f9f" style={{ opacity: "30%" }} zIndex={1}></Box>
+                </Box> 
+            }
             <Box><img src={Logo} style={{ maxWidth: "7rem" }} /></Box>
             { createRoute() }
         </Box>

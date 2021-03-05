@@ -18,7 +18,6 @@ const EmailPage = ({ signIn, dispatch, CHANGE_DATA, CHANGE_DATA_STRUCT }) => {
         dispatch({ type: CHANGE_DATA, data: { isLoading: true }});
         axios.post('/api/identify/sign-in/email', { email: signIn.email }, { cancelToken: source.token })
             .then(({ data }) => {
-                console.log(data);
                 if( !data ) {
                     return dispatch({ type: CHANGE_DATA, data: { isLoading: false }});
                 }
@@ -50,7 +49,7 @@ const EmailPage = ({ signIn, dispatch, CHANGE_DATA, CHANGE_DATA_STRUCT }) => {
         </Box>
         <Box display="flex" alignItems="center" justifyContent="space-between" marginTop="3rem">
             <Link to="/identify/sign-up" style={{ textDecoration: "none", color: "blue" }}>계정 만들기</Link>
-            <Button onClick={onClickSubmit} variant="contained" color="primary">다음</Button>
+            <Button disabled={!signIn.email} onClick={onClickSubmit} variant="contained" color="primary">다음</Button>
         </Box>
     </>
 };

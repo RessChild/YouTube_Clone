@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Divider, IconButton } from "@material-ui/core";
-import { Route, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 
 import SideItem from "../components/SideItem/SideItem";
 
@@ -11,12 +11,15 @@ import { IoReorderThreeOutline } from "react-icons/io5";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import Logo from "../sources/youtube_logo.svg";import CustomButton from "../components/CustomButton/CustomButton";
+import ProfileMenu from "../components/ProfileMenu/ProfileMenu";
 ;
 
 const VideoFrame = ({ location, history }) => {
     // location.pathname 으로 색을 결정
     const { pathname } = location;
     const source = axios.CancelToken.source();
+
+    const [ userInfo, setUserInfo ] = useState(); 
 
     const viewRoute = () => {
         return <Switch>
@@ -31,7 +34,7 @@ const VideoFrame = ({ location, history }) => {
     }
 
     // 좌측 사이드바 온오프
-    const [ sidebar, setSidebar ] = useState(false);
+    const [ sidebar, setSidebar ] = useState(true);
     const onClickSidebar = () => setSidebar(!sidebar);
 
     // 상단 폼 동작기능
@@ -60,6 +63,8 @@ const VideoFrame = ({ location, history }) => {
     const onClickLogo = () => history.push('/');
 
     useEffect(() => {
+      const storage = localStorage.getItem('userInfo');
+      if( storage ) setUserInfo(JSON.parse(storage));
       return () => {
         source.cancel();
       }
@@ -67,7 +72,7 @@ const VideoFrame = ({ location, history }) => {
 
     return (
       <Box width="100vw" height="100vh" display="flex" flexDirection="column" bgcolor="#f2f2f2">
-          <Box id="header" height="3.7rem" bgcolor="white" 
+          <Box id="header" height="3.7rem" bgcolor="white" //style={{ opacity: "90%" }}
             display="flex" alignItems="center" justifyContent="space-between" paddingLeft="1rem" paddingRight="1rem">
             <Box id="header-side-onoff" display="flex" width="10rem" justifyContent="space-between">
                 <IconButton size="small" onClick={onClickSidebar}><IoReorderThreeOutline size="1.8rem"/></IconButton>
@@ -82,12 +87,12 @@ const VideoFrame = ({ location, history }) => {
                 </button>
             </Box>
             <Box id="header-user">
-              { true 
-              ? <CustomButton onClick={onClickLogin}>
-                  <FaUserCircle size="1.5rem"/>
-                  <Box marginLeft="0.5rem">로그인</Box>
-                </CustomButton>
-              : "사용자 프로필"
+              { userInfo
+                ? <ProfileMenu userInfo={userInfo} />
+                : <CustomButton onClick={onClickLogin}>
+                    <FaUserCircle size="1.5rem"/>
+                    <Box marginLeft="0.5rem">로그인</Box>
+                  </CustomButton>
               }
             </Box>
           </Box>
