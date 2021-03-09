@@ -16,9 +16,20 @@ export class HomeService {
 
     async getHome () {
         // 모든 비디오 출력
-        const videos = await this.videoRepository.createQueryBuilder('video').getMany();
+        const videos = await this.videoRepository
+            .createQueryBuilder('video')
+            .leftJoinAndSelect('video.writer', 'user')
+            .getMany();
         console.log(videos);
-        return videos;
+        // 보안이 필요한 정보는 필터링하고 전송
+        return videos.map(({ writer, ...others }) => { 
+                return {
+                    ...others,
+                    writer: writer 
+                        ? { firstName: writer.firstName, lastName: writer.lastName, email: writer.email }
+                        : { firstName: "익", lastName: "명", email: '' } 
+                };
+            })
         // return ['test', 'video', 'home', 'page', "2", "32423"];
     }
 

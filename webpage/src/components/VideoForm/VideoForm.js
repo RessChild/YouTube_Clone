@@ -6,7 +6,7 @@ import Thumbnail from "../../sources/youtube_thumbnail.png";
 import { useHistory } from "react-router-dom";
 
 const VideoForm = ({ video }) => {
-    const { vid, title, description, thumbnail } = video;
+    const { vid, title, description, thumbnail, writer, writedAt } = video;
     const history = useHistory();
 
     // 화면 이동
@@ -29,8 +29,8 @@ const VideoForm = ({ video }) => {
                 </Box>
                 <Box display="flex" flexDirection="column" marginLeft="0.5rem">
                     <Box fontSize="1.15rem" fontWeight="400">{ title }</Box>
-                    <Box fontSize="0.8rem" color="#555555">HUBOG</Box>
-                    <Box fontSize="0.8rem" color="#555555">조회수, 등록일</Box>
+                    <Box fontSize="0.8rem" color="#555555">{ writer && `${writer.firstName} ${writer.lastName}` }</Box>
+                    <Box fontSize="0.8rem" color="#555555">{ writedAt.slice(0,10) }</Box>
                 </Box>
             </Box>            
         </Box>

@@ -34,10 +34,10 @@ export class FileController {
         })
     })) // 파일 업로드 옵션
     // @UseInterceptors(FileFieldsInterceptor)
-    async a (@UploadedFile() file, @Body() body) {
-        const { title, description, image } = body;
+    async writePost (@UploadedFile() file, @Body() body) {
+        const { writer, title, description, image } = body;
         console.log(file, image);
-        return await this.fileService.a( title, description, file.filename );
+        return await this.fileService.writePost( body, file.filename );
     }
 
 }

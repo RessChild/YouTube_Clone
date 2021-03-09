@@ -10,6 +10,7 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 const VideoPage = ({ location: { pathname } }) => {
     const source = axios.CancelToken.source();
     const [ video, setVideo ] = useState({});
+    const { title, writedAt, writer } = video;
 
     const axiosVideo = () => {
         axios.get(`/api/video${pathname}`, { headers: { responseType: "blob" }, cancelToken: source.token })
@@ -47,10 +48,10 @@ const VideoPage = ({ location: { pathname } }) => {
                     </video>
                 </Box>
                 <Box color="blue" fontSize="0.85rem">태그</Box>
-                <Box fontSize="1.2rem">{ video.title }</Box>
+                <Box fontSize="1.2rem">{ title }</Box>
                 <Box display="flex" alignItems="center" justifyContent="space-between"
                     fontSize="0.85rem" borderBottom={1} borderColor="#d0d0d0">
-                    <Box fontWeight="600" color="#777777">{ video.writedAt && video.writedAt.slice(0,10) }</Box>
+                    <Box fontWeight="600" color="#777777">{ writedAt && writedAt.slice(0,10) }</Box>
                     <Box>
                         <IconButton style={{ fontSize: "1rem", fontWeight: "600" }}>
                             <AiFillLike size="1.5rem"/>{"1"}
@@ -67,7 +68,7 @@ const VideoPage = ({ location: { pathname } }) => {
                                 <img style={{ maxWidth: "3rem", maxHeight: "3rem" }} />
                             </Box>
                             <Box>
-                                <Box fontSize="0.9rem">채널명</Box>
+                                <Box fontSize="0.9rem">{ writer && `${writer.firstName} ${writer.lastName}`  }</Box>
                                 <Box fontSize="0.7rem" fontWeight="600" color="#777777">구독자 수</Box>
                             </Box>
                         </Box>

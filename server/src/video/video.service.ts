@@ -21,8 +21,12 @@ export class VideoService {
 
     async getVideoInfo (vid: string) {
         // 선택한 비디오만 정보 전달
-        const video = await this.videoRepository.findOne({ vid: vid });
-        console.log(video);
-        return video;
+        const { writer, ...others } = await this.videoRepository
+            .findOne({ vid: vid }, { relations: ['writer'] });
+        return { ...others, 
+            writer: writer 
+                ? { firstName: writer.firstName, lastName: writer.lastName, email: writer.email }
+                : { firstName: "익", lastName: "명", email: '' }
+            };
     }
 }

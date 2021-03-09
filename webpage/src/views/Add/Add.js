@@ -1,8 +1,10 @@
 import { Box, Button } from "@material-ui/core"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios";
 
 const Add = () => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const source = axios.CancelToken.source();
 
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
@@ -11,15 +13,16 @@ const Add = () => {
 
     const onClickSubmit = () => {
 
-        if( !image || !video || !title ) return alert("빈칸있음");
+        // if( !image || !video || !title ) return alert("빈칸있음");
         const formData = new FormData();
+        formData.append('writer', userInfo.email);
         formData.append('video', video);
         formData.append('title', title);
         formData.append('description', description);
 
         // formData.append('thumbnail', image);
 
-        axios.post('/api/file/upload', formData)
+        axios.post('/api/file/upload', formData, { cancelToken: source.token })
             .then( ({ data }) => {
                 console.log(data);
             })
@@ -37,6 +40,10 @@ const Add = () => {
     }
     const onChangeTitle = ({ currentTarget: { value }}) => setTitle(value);
     const onChangeDescription = ({ currentTarget: { value }}) => setDescription(value);
+
+    useEffect(() => {
+        return () => source.cancel();
+    })
 
     return (
         <Box>
