@@ -34,7 +34,7 @@ const ProfileMenu = ({ userInfo: { firstName, lastName, email } }) => {
         <Box paddingLeft="1.5rem" paddingRight="1.5rem" ref={anchorRef}>
             <IconButton onClick={onClickButton}
                 style={{ background:"#7777ff", borderRadius: "1rem", 
-                border: "0", width: "2rem", height: "2rem",
+                border: "0", width: "2rem", height: "2rem", fontSize: "1rem",
                 textAlign:"center", color: "white", lineHeight: "2rem" }}>
                 {`${lastName[0]}`}    
             </IconButton>
@@ -48,12 +48,15 @@ const ProfileMenu = ({ userInfo: { firstName, lastName, email } }) => {
         <Popper open={open} anchorEl={anchorRef.current} transition >
             <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
-                <Box width="10rem" display="flex" flexDirection="column">
+                <Box width="20rem" display="flex" flexDirection="column">
                     <Box display="flex" padding="1rem" borderColor="#aaaaaa" borderBottom={1}>
-                        <Box width="4rem">이미지</Box>
-                        <Box display="flex" flexDirection="column">
-                            <Box>{ `${firstName}${lastName}` }</Box>
-                            <Box>{email}</Box>
+                        <Box width="3rem" height="3rem" bgcolor="#7777ff" borderRadius="1.5rem" 
+                            textAlign="center" lineHeight="3rem" fontSize="1.5rem" color="#ffffff">
+                            {`${lastName[0]}`} 
+                        </Box>
+                        <Box marginLeft="1rem" display="flex" flexDirection="column">
+                            <Box height="1.5rem">{ `${firstName}${lastName}` }</Box>
+                            <Box height="1.5rem">{email}</Box>
                         </Box>
                     </Box>
                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>

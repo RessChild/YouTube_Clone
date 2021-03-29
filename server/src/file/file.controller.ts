@@ -28,7 +28,7 @@ export class FileController {
                 cb(null, "./videos")
             },
             filename: ( req, file, cb ) => { // 파일명 규칙
-                console.log('video destination', file);
+                console.log('video filename', file);
                 cb( null, `${Date.now()}-${file.originalname}` );
             }
         })
