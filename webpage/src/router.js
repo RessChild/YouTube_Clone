@@ -7,10 +7,10 @@ import { BsCollectionPlayFill } from "react-icons/bs";
 import { TiSocialYoutube } from "react-icons/ti";
 import { GiBackwardTime } from "react-icons/gi";
 
-import Add from "./views/Add/Add";
 import VideoPage from "./views/VideoPage/VideoPage";
 import SignUp from "./views/SignUp/SignUp";
 import SignIn from "./views/SignIn/SignIn";
+import Upload from "./views/Upload/Upload";
 
 export const PublicRoute = [
     {
@@ -60,7 +60,7 @@ export const TestRoute = [
         path: '',
         icon: GiBackwardTime,
         name: '게시글 작성 테스트',
-        component: Add,
+        component: Upload,
     },
 ]
 
