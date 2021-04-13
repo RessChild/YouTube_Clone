@@ -7,16 +7,18 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 
 
 // 비디오 출력
-const VideoPage = ({ location: { pathname } }) => {
+const VideoPage = ({ location, match: { params } }) => {
+    // location 대신 match 의 params 값을 사용
+    const { video } = params;
     const source = axios.CancelToken.source();
-    const [ video, setVideo ] = useState({});
-    const { title, writedAt, writer } = video;
+    const [ data, setData ] = useState({});
+    const { title, writedAt, writer } = data;
 
     const axiosVideo = () => {
-        axios.get(`/api/video${pathname}`, { headers: { responseType: "blob" }, cancelToken: source.token })
+        axios.get(`/api/video/${video}`, { headers: { responseType: "blob" }, cancelToken: source.token })
             .then(({ data }) => { 
-                console.log(data);
-                setVideo(data);
+                // console.log(data);
+                setData(data);
             })
             .catch( e => {
                 if( axios.isCancel(e) ) return;
@@ -42,8 +44,8 @@ const VideoPage = ({ location: { pathname } }) => {
                     <video controls
                         preload="false" onClick={onClickVideoBar}
                         style={{ position: "absolute", top: 0, width: "100%", height: "100%" }}
-                        key={video.video && `/api/video/get-video/${video.video}`}>
-                        <source src={video.video && `/api/video/get-video/${video.video}`} type="video/mp4" />
+                        key={data.video && `/api/video/get-video/${data.video}`}>
+                        <source src={data.video && `/api/video/get-video/${data.video}`} type="video/mp4" />
                         지원을 안하면 등장함
                     </video>
                 </Box>
@@ -77,7 +79,7 @@ const VideoPage = ({ location: { pathname } }) => {
                         </Box>
                     </Box>
                     <Box paddingLeft="4rem">
-                    { video.description }
+                    { data.description }
                     </Box>
                 </Box>
                 <Box marginTop="1rem">

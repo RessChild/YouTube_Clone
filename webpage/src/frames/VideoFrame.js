@@ -23,7 +23,10 @@ const VideoFrame = ({ location, history }) => {
 
     const viewRoute = () => {
         return <Switch>
-            { TotalRoute.map( ({ classify, path, component }, idx) => <Route key={`route-${idx}`} path={`${classify}${path}`} exact component={component} /> ) }
+            { TotalRoute.map( ({ classify, path, component }, idx) => {
+                // console.log(`${classify}${path}${params}`);
+                return <Route key={`route-${idx}`} path={`${classify}${path}`} exact sensitive component={component} /> 
+              }) }
         </Switch>
     }
 

@@ -1,5 +1,5 @@
 import { Box, Button } from "@material-ui/core";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
 const SelectPage = ({ dispatchInput }) => {
@@ -13,10 +13,11 @@ const SelectPage = ({ dispatchInput }) => {
 
     const onChangeSrc = ({ currentTarget: { files, id }}) => {
         if( files.length < 0 ) return;
+        setDisabled(state => !state);
         
         const [ tag, target ] = id.split('-');
         dispatchInput(target, files[0]);
-        setDisabled(state => !state);
+        // dispatchInput("mode", "option");
     }
 
     // 원래는 label 로 돌려만들어도 되지만, 그냥 ref 써서 호출해버림

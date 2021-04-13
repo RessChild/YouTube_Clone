@@ -1,18 +1,17 @@
-// import PasswordPage from "./pages/PasswordPage";
-
+import OptionPage from "./pages/OptionPage";
 import SelectPage from "./pages/SelectPage";
 
 const url = '/upload';
 
-export const singInDefaultRoute = `${url}/video`;
+export const uploadDefaultRoute = `${url}/video`;
 
-export const signInRoute = [
+export const uploadRoute = [
     {
         path: `${url}/video`,
         component: SelectPage,
     },
     {
         path: `${url}/option`,
-        // component: PasswordPage,
+        component: OptionPage,
     }
 ]

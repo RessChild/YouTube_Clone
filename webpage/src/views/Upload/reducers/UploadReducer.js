@@ -1,4 +1,5 @@
 export const uploadDefault = {
+    // mode: "video",
     title: "",
     description: "",
     thumbnail: null,

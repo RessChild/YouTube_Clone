@@ -1,7 +1,6 @@
-import { Box, Button, LinearProgress, TextField } from "@material-ui/core";
-import axios from "axios";
-import React, { useEffect, useReducer, useState } from "react";
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Box, LinearProgress } from "@material-ui/core";
+import React, { useEffect, useReducer } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import Logo from "../../sources/google_logo.jpg";
 import { CHANGE_DATA, CHANGE_DATA_STRUCT, signInDefault, signInReducer } from "./reducers/SignInReducer";

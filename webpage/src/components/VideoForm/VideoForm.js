@@ -11,7 +11,7 @@ const VideoForm = ({ video }) => {
 
     // 화면 이동
     const onClickVideo = () => {
-        history.push(`/${vid}`);
+        history.push(`/video/${vid}`);
     };
             
     return <Grid onClick={onClickVideo} item xs={6} sm={6} md={3} style={{ padding: "1rem 0.5rem" }}>

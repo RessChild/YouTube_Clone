@@ -14,8 +14,8 @@ import Upload from "./views/Upload/Upload";
 
 export const PublicRoute = [
     {
-        classify: '', // 분류
-        path: '/', // 경로명
+        classify: '/', // 분류
+        path: '', // 경로명
         icon: TiHome,
         name: '홈',
         component: Home,
@@ -56,8 +56,8 @@ export const PrivateRoute = [
 
 export const TestRoute = [
     {
-        classify: '/test',
-        path: '',
+        classify: '/upload',
+        path: '/:mode',
         icon: GiBackwardTime,
         name: '게시글 작성 테스트',
         component: Upload,
@@ -66,7 +66,7 @@ export const TestRoute = [
 
 export const VideoRoute = [
     {
-        classify: '',
+        classify: '/video',
         path: '/:video',
         component: VideoPage,
     }
