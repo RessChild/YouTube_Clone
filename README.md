@@ -116,3 +116,6 @@
 19. 2021/04/13
     - 원인 찾음 (exact 때문에, 하위 route 가 제대로 동작을 안한 것)
       :params 을 명시해주는거로 해결이 되긴 하는데, 이건 이거대로 현재 구조랑 좀 꼬임
+      OK 해결 완료
+    - 비디오 게시글 정보 입력 페이지 구축 시작
+      ( https://material-ui.com/components/text-fields/#customized-inputs )
