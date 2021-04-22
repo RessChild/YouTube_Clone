@@ -2,8 +2,7 @@ import { Box, Button } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
-const SelectPage = ({ dispatchInput }) => {
-
+const SelectPage = ({ dispatch, CHANGE_DATA }) => {
     const input_video = useRef();
     const [ disabled, setDisabled ] = useState(false);
 
@@ -16,7 +15,8 @@ const SelectPage = ({ dispatchInput }) => {
         setDisabled(state => !state);
         
         const [ tag, target ] = id.split('-');
-        dispatchInput(target, files[0]);
+        dispatch({ type: CHANGE_DATA, data: { [target]: files[0] }});
+        // dispatchInput(target, );
         // dispatchInput("mode", "option");
     }
 

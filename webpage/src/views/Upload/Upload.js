@@ -11,7 +11,7 @@ const Upload = ({ history }) => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
     const [ state, dispatch ] = useReducer(uploadReducer, uploadDefault);
-    const { title, description, thumbnail, video, mode } = state;
+    const { video } = state;
 
     // const onClickSubmit = () => {
 
@@ -31,11 +31,6 @@ const Upload = ({ history }) => {
     //         .catch( e => alert(e) );
     // };
 
-    // dispatch 함수
-    const dispatchInput = (target, value) => {
-        dispatch({ type: CHANGE_DATA, data: { [target]: value }});
-    }
-
     // // src 파일 수정
     // const onChangeSrc = ({ currentTarget: { files, id }}) => {
     //     console.log(files[0]) ;
@@ -49,12 +44,15 @@ const Upload = ({ history }) => {
     //     dispatch({ type: CHANGE_DATA, data: { [target]: value }});
     // }
 
+    const renderPrompt = {
+        state, dispatch, CHANGE_DATA
+    }
 
     const createRoute = () => {
         return <Switch>
                 {
                     uploadRoute.map( (route, idx) => {
-                        return <Route key={`upload-${idx}`} path={route.path} render={() => <route.component dispatchInput={dispatchInput} />} />
+                        return <Route key={`upload-${idx}`} path={route.path} render={() => <route.component {...renderPrompt} />} />
                     })
                 }
                 <Redirect to={uploadDefaultRoute} />
@@ -62,7 +60,12 @@ const Upload = ({ history }) => {
     }
 
     useEffect(() => {
-        if( video ) history.replace(`/upload/option`);
+        if( video ) {
+            // console.log(video);
+            dispatch({ type: CHANGE_DATA, data: { title: video.name }});
+            history.replace(`/upload/option`);
+        }
+        else history.replace('/upload/video');
     }, [video]);
 
     return (
