@@ -119,3 +119,23 @@
       OK 해결 완료
     - 비디오 게시글 정보 입력 페이지 구축 시작
       ( https://material-ui.com/components/text-fields/#customized-inputs )
+20. 2021/04/20
+    - redditTextField 작동 확인 ( useStyle이 hook 함수라서 오류가 났던 것 )
+    - upload 페이지 구조를 좀 바꿔야할 것 같음
+      (하위 컴포넌트에 state, dispatch 를 직접 전달하고, 그 내부에서 함수를 구축해야할 듯)
+21. 2021/04/22
+    - upload 하위페이지로 state, dispatch 를 직접 넘기도록 수정
+    - redditText 랑 reducer 값이랑 연동 완료 + 기본 틀 대략 구축해둠
+    - 업로드의 상단 진행바는 일단 구현이 불필요해보여서 생략하기로 함
+      ( 원본에선 [ 세부정보, 동영상 요소, 검사, 공개 상태 ] 4단계로 구분됨 )
+    - textOverflow: ellipsis 적용 시도 중 ( flex 떄문인지 적용이 제대로 안됨 )
+22. 2021/04/28
+    - flex 랑 textoverflow 관계 해결
+      a. width 값이 고정되어 있어야함
+      b. 길이의 영향을 주는 모든 컴포넌트는 overflow="hidden" 속성을 가져야함
+      ==> 해당 실습에선 내부 컴포넌트의 길이가 텍스트 길이에 영향을 받고,
+          부모의 길이에 전반적인 영향을 미침 (flex 이기 떄문)
+          so, 마지막으로 길이에 영향을 받는 최상위 부모의 overflow 속성도 선언되어야 함
+    - video 랑 image 를 같이 전송이 안되는 것 같음.
+      유튜브에서도 영상을 먼저 서버에 전송해서 임시저장하고, 이미지 폼을 따로 구축하는 듯??
+      ===>> 영상 등록에 임시저장 페이지를 따로 구축해야 할 것 같음

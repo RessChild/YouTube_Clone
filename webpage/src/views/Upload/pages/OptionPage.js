@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 
 import RedditTextField from "../../../components/RedditTextField/RedditTextField";
 
@@ -47,8 +47,8 @@ const OptionPage = ({ state, dispatch, CHANGE_DATA }) => {
                         </Box>
                     </Box>
                 </Box>
-                <Box flex={3} marginLeft="3rem">
-                    <Box width="100%" /*border={1} borderRadius={5}*/ overflow="hidden">
+                <Box flex={3} marginLeft="3rem" overflow="hidden">
+                    {/* <Box overflow="hidden"> */}
                         <Box position="relative" bgcolor="#e1e1e1" paddingTop="calc(100% * 9 / 16)">
                             <Box width="100%" height="100%" position="absolute" top={0} right={0} 
                                 display="flex" alignItems="center" justifyContent="center">
@@ -59,12 +59,16 @@ const OptionPage = ({ state, dispatch, CHANGE_DATA }) => {
                         </Box>
                         <Box padding="1rem" bgcolor="#eeeeee">
                             <Box fontSize="0.85rem" color="gray">파일 이름</Box>
-                            <Box width="100%" whiteSpace="nowrap" overflow="hidden" textOverflow="ellipsis">
-                                {video.name}22222222222222222
+                            <Box whiteSpace="nowrap" overflow="hidden" textOverflow="ellipsis">
+                                {video.name}
                             </Box>
                         </Box>
-                    </Box>
+                    {/* </Box> */}
                 </Box>
+            </Box>
+            <Box className="footer" width="60rem" display="flex" justifyContent="flex-end" 
+                borderColor="gray" borderTop={1} margin="1rem" padding="0.5rem">
+                <Button variant="contained" color="primary">다음</Button>
             </Box>
         </Box>
     )
