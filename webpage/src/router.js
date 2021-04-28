@@ -89,6 +89,15 @@ export const IdentifyRoute = [
     }
 ]
 
+// 나중에 추가등록시킬것
+const UploadRoute = [
+    {
+        classify: '/upload',
+        path: '/:mode',
+        component: Upload,
+    }
+]
+
 export const TotalRoute = [
     ...TestRoute,
     ...PublicRoute,

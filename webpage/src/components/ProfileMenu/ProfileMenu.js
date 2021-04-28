@@ -13,8 +13,9 @@ const ProfileMenu = ({ userInfo: { firstName, lastName, email } }) => {
     const onClickMenu = ({ currentTarget: { id }}) => {
         handleClose();
         console.log(id);
+        const selected_menu = menuList.find( menu => menu.id === id );
         if( id === "log-out" ) localStorage.removeItem('userInfo');
-        history.go();
+        history.push(selected_menu.path);
     }
 
     const handleClose = () => {

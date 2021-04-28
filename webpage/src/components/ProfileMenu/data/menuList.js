@@ -3,7 +3,7 @@ import { BsPencilSquare } from "react-icons/bs";
 
 export const menuList = [
     {
-        path: '',
+        path: '/upload/video',
         id: 'write-post',
         icon: BsPencilSquare,
         text: "게시글 작성"

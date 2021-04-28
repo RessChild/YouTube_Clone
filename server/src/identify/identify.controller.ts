@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { IdentifyService } from './identify.service';
 
 @Controller('/api/identify')
@@ -6,6 +6,11 @@ export class IdentifyController {
     constructor (
         private readonly identifyService: IdentifyService
     ) {}
+
+    // 테스트
+    @Post('/')
+    async a(@Body() body){
+    }
 
     // 회원가입
     @Post('/sign-up')
