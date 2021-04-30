@@ -14,6 +14,29 @@ export class FileService {
         private readonly userRepository: Repository<User>,
     ) {}
 
+    // 작성한 포스트 기록
+    async getPosts({ email }) {
+        console.log(email);
+        const writer = await this.userRepository.findOne({ email });
+        // console.log(writer);
+        const posts = await this.videoRepository.find({
+            writer: writer
+        });
+        // console.log(posts);
+
+        return posts;
+        
+        /*
+        [{
+            video: 'abc',
+            date: '1234',
+            views: '1',
+            comments: '3',
+        }];
+        */
+    }
+
+    // 동영상 업로드 (작성)
     async writePost ({ writer, title, description }, video: string) {
         // 트랜젝션
         const queryRunner = getConnection().createQueryRunner();

@@ -11,6 +11,10 @@ const OptionPage = ({ state, dispatch, CHANGE_DATA }) => {
         dispatch({ type: CHANGE_DATA, data: { [target]: value }});
     }
 
+    const onClickBtn = () => {
+        alert('버튼 클릭');
+    }
+
     useEffect(() => {
     },[]);
     
@@ -68,7 +72,7 @@ const OptionPage = ({ state, dispatch, CHANGE_DATA }) => {
             </Box>
             <Box className="footer" width="60rem" display="flex" justifyContent="flex-end" 
                 borderColor="gray" borderTop={1} margin="1rem" padding="0.5rem">
-                <Button variant="contained" color="primary">다음</Button>
+                <Button variant="contained" color="primary" onClick={onClickBtn}>다음</Button>
             </Box>
         </Box>
     )

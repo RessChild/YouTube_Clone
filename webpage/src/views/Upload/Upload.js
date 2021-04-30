@@ -65,7 +65,7 @@ const Upload = ({ history }) => {
             dispatch({ type: CHANGE_DATA, data: { title: video.name }});
             history.replace(`/upload/option`);
         }
-        else history.replace('/upload/video');
+        // else history.replace('/upload/video');
     }, [video]);
 
     return (

@@ -8,6 +8,12 @@ export class FileController {
 
     constructor( private readonly fileService: FileService){}
 
+    @Post('/get-posts')
+    async getPosts(@Body() body) {
+        const videos = this.fileService.getPosts(body);
+        return videos;
+    }
+
     @Post('/upload')
     // @UseInterceptors(FileInterceptor('thumbnail', {
     //     storage: diskStorage({ // 저장소 옵션

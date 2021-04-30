@@ -57,7 +57,7 @@ export const PrivateRoute = [
 export const TestRoute = [
     {
         classify: '/upload',
-        path: '/:mode',
+        path: '',
         icon: GiBackwardTime,
         name: '게시글 작성 테스트',
         component: Upload,
